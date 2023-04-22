@@ -31,3 +31,9 @@ code {
 .vote {
   background-color: var(--light-bg);
 }
+
+@media (min-width: 500px) {
+  .leftNav {
+    display: none;
+  }
+}

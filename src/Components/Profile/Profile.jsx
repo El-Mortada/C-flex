@@ -1,6 +1,8 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
-export default function Profile({ userData }) {
+export default function Profile() {
+  const userData = useSelector((state) => state.users.userData);
   let { first_name, last_name, age, email } = userData;
   return (
     <>

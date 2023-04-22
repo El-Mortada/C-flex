@@ -6,17 +6,17 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
-import AuthContextProvider from "./MediaContext/AuthContext";
 import MediaContextProvider from "./MediaContext/MediaContext";
-
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <AuthContextProvider>
-      <MediaContextProvider>
+    <MediaContextProvider>
+      <Provider store={store}>
         <App />
-      </MediaContextProvider>
-    </AuthContextProvider>
+      </Provider>
+    </MediaContextProvider>
   </React.StrictMode>
 );
 

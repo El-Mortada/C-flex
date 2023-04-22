@@ -1,3 +1,5 @@
+/** @format */
+
 import "./App.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./Components/Layout/Layout.jsx";
@@ -14,10 +16,14 @@ import { useEffect } from "react";
 import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 import ItemDetails from "./Components/ItemDetails/ItemDetails";
 import { useContext } from "react";
-import { AuthContext } from "./MediaContext/AuthContext";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "./store/user/user.reducer";
+import Test from "./Components/Test";
+import Test2 from "./Components/Test2";
 
 function App() {
-  let { userData, setuserData } = useContext(AuthContext);
+  const dispatch = useDispatch();
+  // let { userData, setuserData } = useContext(AuthContext);
   useEffect(() => {
     if (localStorage.getItem("userToken") !== null) {
       saveUserData();
@@ -26,13 +32,13 @@ function App() {
   function saveUserData() {
     let encodedToken = localStorage.getItem("userToken");
     let decodedToken = jwtDecode(encodedToken);
-    setuserData(decodedToken);
+    dispatch(setUserData(decodedToken));
   }
 
   let routers = createBrowserRouter([
     {
       path: "/",
-      element: <Layout userData={userData} setuserData={setuserData} />,
+      element: <Layout />,
       children: [
         {
           index: true,
@@ -74,13 +80,21 @@ function App() {
           path: "profile",
           element: (
             <ProtectedRoute>
-              <Profile userData={userData} />
+              <Profile />
             </ProtectedRoute>
           ),
         },
         {
           path: "register",
           element: <Register />,
+        },
+        {
+          path: "test",
+          element: <Test />,
+        },
+        {
+          path: "test2",
+          element: <Test2 />,
         },
         {
           path: "tv",
